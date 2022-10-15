@@ -2,6 +2,8 @@
 #define MAIN_H
 
 int _printf(const char *format, ...);
-int _s_handler(char, char *);
-int _c_handler(char, char);
+int s_handler(char);
+int c_handler(char);
+int percentage_handler(char);
+
 #endif
