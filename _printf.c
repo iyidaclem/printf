@@ -16,6 +16,8 @@ int _printf(const char *format, ...)
 
 	va_start(ap, format);
 	len = 0;
+	if(!format)
+		return -1;
 	while (*format != '\0')
 	{
 		if (*format  == '%')
