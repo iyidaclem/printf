@@ -6,5 +6,6 @@ int s_handler(char);
 int c_handler(char);
 int percentage_handler(char);
 int d_handler(char);
+int i_handler(char);
 
 #endif
