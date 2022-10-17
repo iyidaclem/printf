@@ -11,37 +11,23 @@
 
 int _printf(const char *format, ...)
 {
-	int len2, len;
+	int len;
 	va_list ap;
+
+	int (*get_func)(va_list);
 
 	va_start(ap, format);
 	len = 0;
-	if(!format)
-		return -1;
+	if (!format)
+		return (-1);
 	while (*format != '\0')
 	{
 		if (*format  == '%')
 		{
 			format++;
-			if (*format == 'c')
-			{
-				len2 = c_handler(va_arg(ap, int));
-				len += len2;
-				format++;
-			}
-			else if (*format == 's')
-			{
-				len2 = s_handler(va_arg(ap, char *));
-				len += len2;
-				format++;
-			}
-			else if (*format == 's')
-			{
-				len2 = percentage_handler(va_arg(ap, int));
-				len += len2;
-				format++;
-			}
-
+			get_func = get_op_func(*format);
+			if (get_func)
+				len += get_func(ap);
 		}
 		else
 		{
