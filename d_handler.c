@@ -2,7 +2,7 @@
 #include "main.h"
 #include <stdarg.h>
 /**
-*c_handler - A function to print a char
+*d_handler - A function to print a char
 *@list: variadic argument list string to print
 *Return: length of the printed string
 */

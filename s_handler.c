@@ -13,12 +13,19 @@
 
 int s_handler(va_list list)
 {
-	char *str;
+	char c;
+	int i;
 
 	if (list)
 	{
-		str = va_arg(list, char *);
-		return (write(1, str, strlen(str)));
+		c = va_arg(list, int);
+
+		for (i = 0; c != '\0'; i++)
+		{
+			write(1, &c, 1);
+			c++;
+		}
+		return (i);	
 	}
 	return (0);
 }

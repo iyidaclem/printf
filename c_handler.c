@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "main.h"
 #include <stdarg.h>
+#include <unistd.h>
 /**
 *c_handler - A function to print a char
 *@list: variadic argument list string to print
@@ -9,12 +10,12 @@
 
 int c_handler(va_list list)
 {
-	int l;
+	char c;
 
 	if (list)
 	{
-		l = _putchar(va_arg(list, int));
-		return (l);
+		c = va_arg(list, int);
+		return write(1, &c, 1);
 	}
 	return (0);
 }

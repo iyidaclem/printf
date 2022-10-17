@@ -4,14 +4,17 @@
 #include "main.h"
 /**
 *percentage_handler - A function to print a %
-*@c: string to print
+*@list: list of variadic argument list
 *Return: length of the printed string
 */
 
 int percentage_handler(va_list list)
 {
 	if (list)
-		return (_putchar(va_arg(list, int)));
+	{
+		va_arg(list, int);
+		return (_putchar('%'));
+	}
 	else
 		return (0);
 }
