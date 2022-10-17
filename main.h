@@ -1,25 +1,39 @@
 #ifndef MAIN_H
 #define MAIN_H
-#include <stdarg.h>
-/**
- * struct op - Struct op
- *
- * @op: The operator
- * @f: The function associated
- */
-typedef struct op
-{
-	char op;
-	int (*f)(va_list);
-} op_t;
 
-int _putchar(char);
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+#include <unistd.h>
+#include <stdarg.h>
+#include <stddef.h>
+
+/**
+ * struct print - structure for printing various types
+ * @t: type to print
+ * @f: function to print
+ */
+typedef struct print
+{
+	char *t;
+	int (*f)(va_list);
+} print_t;
+
 int _printf(const char *format, ...);
-int s_handler(va_list);
-int c_handler(va_list);
-int percentage_handler(va_list);
-int d_handler(va_list);
-int i_handler(va_list);
-int (*get_op_func(char c))(va_list);
+int _putchar(char c);
+int print_char(va_list c);
+int print_string(va_list s);
+int print_int_val(va_list inv);
+int print_dec(va_list d_val);
+int print_unsigned(va_list u);
+int print_binary(va_list b);
+int print_octal(va_list o);
+int print_xlow(va_list x);
+int print_Xcap(va_list X);
+int print_add(va_list p);
+int print_super(va_list S);
+int print_reverse(va_list r);
+int print_R(va_list R);
+int print_buf(char *buf, unsigned int nbuf);
 
 #endif
