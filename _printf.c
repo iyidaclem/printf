@@ -1,41 +1,81 @@
-#include <stdio.h>
-#include <stdarg.h>
-#include <stdlib.h>
 #include "main.h"
-
+#include <stdlib.h>
 /**
-*_printf - A function that produces output according to a format.
-*@format: Format specifier
-*Return: Length of the print string
-*/
-
-int _printf(const char *format, ...)
+ * check_for_specifiers - checks if there is a valid format specifier
+ * @format: possible format specifier
+ *
+ * Return: pointer to valid function or NULL
+ */
+static int (*check_for_specifiers(const char *format))(va_list)
 {
-	int len;
-	va_list ap;
+	unsigned int i;
+	print_t p[] = {
+		{"c", print_char},
+		{"s", print_string},
+		{"inv", print_int_val},
+		{"d_val", print_dec},
+		{"u", print_unsigned},
+		{"b", print_binary},
+		{"o", print_octal},
+		{"x", print_xlow},
+		{"X", print_Xcap},
+		{"p", print_add},
+		{"S", print_super},
+		{"r", print_reverse},
+		{"R", print_R},
+		{NULL, NULL}
+	};
 
-	int (*get_func)(va_list);
-
-	va_start(ap, format);
-	len = 0;
-	if (!format)
-		return (-1);
-	while (*format != '\0')
+	for (i = 0; p[i].t != NULL; i++)
 	{
-		if (*format  == '%')
+		if (*(p[i].t) == *format)
 		{
-			format++;
-			get_func = get_op_func(*format);
-			if (get_func)
-				len += get_func(ap);
-		}
-		else
-		{
-			 _putchar(*format);
-			 format++;
-			 len++;
+			break;
 		}
 	}
-	va_end(ap);
-	return (len);
+	return (p[i].f);
+}
+
+/**
+ * _printf - prints anything
+ * @format: list of argument types passed to the function
+ *
+ * Return: number of characters printed
+ */
+int _printf(const char *format, ...)
+{
+	unsigned int i = 0, sum = 0;
+	va_list valist;
+	int (*f)(va_list);
+
+	if (format == NULL)
+		return (-1);
+	va_start(valist, format);
+	while (format[i])
+	{
+		for (; format[i] != '%' && format[i]; i++)
+		{
+			_putchar(format[i]);
+			sum++;
+		}
+		if (!format[i])
+			return (sum);
+		f = check_for_specifiers(&format[i + 1]);
+		if (f != NULL)
+		{
+			sum += f(valist);
+			i += 2;
+			continue;
+		}
+		if (!format[i + 1])
+			return (-1);
+		_putchar(format[i]);
+		sum++;
+		if (format[i + 1] == '%')
+			i += 2;
+		else
+			i++;
+	}
+	va_end(valist);
+	return (sum);
 }
