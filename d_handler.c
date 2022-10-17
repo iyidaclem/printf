@@ -7,7 +7,7 @@
 *Return: length of the printed string
 */
 
-int c_handler(va_list list)
+int d_handler(va_list list)
 {
 	int l;
 

@@ -8,10 +8,10 @@
 *Return: length of the printed string
 */
 
-int percentage_handler(char c)
+int percentage_handler(va_list list)
 {
-	if (c)
-		return (_putchar(c));
+	if (list)
+		return (_putchar(va_arg(list, int)));
 	else
 		return (0);
 }

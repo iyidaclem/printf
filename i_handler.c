@@ -2,12 +2,12 @@
 #include "main.h"
 #include <stdarg.h>
 /**
-*c_handler - A function to print a char
+*i_handler - A function to print a unsigned integer
 *@list: variadic argument list string to print
 *Return: length of the printed string
 */
 
-int c_handler(va_list list)
+int i_handler(va_list list)
 {
 	int l;
 
