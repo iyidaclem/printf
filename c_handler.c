@@ -15,7 +15,7 @@ int c_handler(va_list list)
 	if (list)
 	{
 		c = va_arg(list, int);
-		return write(1, &c, 1);
+		return (write(1, &c, 1));
 	}
 	return (0);
 }

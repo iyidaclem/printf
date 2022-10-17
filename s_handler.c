@@ -25,7 +25,7 @@ int s_handler(va_list list)
 			write(1, &c, 1);
 			c++;
 		}
-		return (i);	
+		return (i);
 	}
 	return (0);
 }
